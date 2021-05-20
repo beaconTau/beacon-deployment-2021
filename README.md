@@ -167,8 +167,8 @@ If it is not already installed I would recommend getting and using it.  It is a 
 ## 0.4.0 Testing Setup
 
 Attempt running both test analysis scripts from the [BEACON Analysis Package](https://github.com/djsouthall/beacon) to check if the code is functioning correctly:
-    * [beacon/analysis/sample_script_A.py](https://github.com/djsouthall/beacon/blob/master/analysis/sample_script_A.py) 
-    * [beacon/analysis/sample_script_B.py](https://github.com/djsouthall/beacon/blob/master/analysis/sample_script_B.py) 
+* [beacon/analysis/sample_script_A.py](https://github.com/djsouthall/beacon/blob/master/analysis/sample_script_A.py) 
+* [beacon/analysis/sample_script_B.py](https://github.com/djsouthall/beacon/blob/master/analysis/sample_script_B.py) 
 
 ## 1.0.0 Calibration
 
