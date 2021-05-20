@@ -24,13 +24,13 @@ Scripts developed for the 2021 deployments of the BEACON experiment.  These scri
 
 0.3.1 [Preparing Ubuntu](#031-preparing-ubuntu)
 
-0.3.1 [Installing FFTW3](#031-installing-fftw3)
+0.3.2 [Installing FFTW3](#032-installing-fftw3)
 
-0.3.2 [Optional Git Setup](#032-optional-git-setup)
+0.3.3 [Optional Git Setup](#033-optional-git-setup)
 
-0.3.3 [Getting Setup to Code](#033-getting-setup-to-code)
+0.3.4 [Getting Setup to Code](#034-getting-setup-to-code)
 
-0.3.4 [Optional iPython Setup](#034-optional-ipython-setup)
+0.3.5 [Optional iPython Setup](#035-optional-ipython-setup)
 
 0.4.0 [Testing Setup](#040-testing-setup)
 
@@ -50,9 +50,9 @@ This sections describes how to get setup running the code.  Much of these instru
 
 The code was developed using compatible builds of Python 3.7.1 (or newer) and ROOT 6.22.02 (or newer).  It may work with older versions, but no guarentees are made.  Details are provided for getting started in general on Ubuntu in [Section 0.3.0](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#030-installing-on-ubuntu), as well as getting started on Windows via installing Ubuntu using the Windows Subsytem for Linux Version 2 (WSL2) in [Section 0.2.0](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#020-installing-on-windows).
 
-This analysis framework is built using the BEACON event reader developed by [Cosmin Deaconu](https://github.com/cozzyd).  The [beaconroot](https://github.com/beaconTau/beaconroot) repository must be installed as described in that packages [README](https://github.com/beaconTau/beaconroot/blob/master/README.md).   This reader utilizes compiled C++/ROOT code to do the underlying event handling, and provides a simple python class which is what is directly referenced in this analysis code.  See [Section 0.3.3](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#033-getting-setup-to-code).
+This analysis framework is built using the BEACON event reader developed by [Cosmin Deaconu](https://github.com/cozzyd).  The [beaconroot](https://github.com/beaconTau/beaconroot) repository must be installed as described in that packages [README](https://github.com/beaconTau/beaconroot/blob/master/README.md).   This reader utilizes compiled C++/ROOT code to do the underlying event handling, and provides a simple python class which is what is directly referenced in this analysis code.  See [Section 0.3.4](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#034-getting-setup-to-code).
 
-The majority of the scripts in this analysis package utilize the [FFTPrepper](https://github.com/djsouthall/beacon/blob/2d2233c13ca2d1d659f543ce8e78c44b760a49ba/tools/fftmath.py#L43) class, which acts as a wrapper class on the beaconroot Reader class - providing additional tools for streamlining the process of upsampling, and filtering (additionally there are some daughter classes defined to aid in cross correlations / time delay calculations as well as comparing events to a provided template event).  As part of the optional filtering available in these classes, the so-called Sine Subtraction method of CW removal is available for use when loading signals.  A FFTPrepper object can have these [SineSubtract](https://github.com/djsouthall/beacon/blob/master/tools/sine_subtract.py) objects added to it for use when loading signals.  These utilize code from [libRootFftwWrapper](https://github.com/nichol77/libRootFftwWrapper).  Instructions for installing libRootFftWrapper are included in multiple locations below, however you can also follow the instructions in the [README](https://github.com/nichol77/libRootFftwWrapper/blob/master/README.md) of that package.  Ensure to install with the correct version of python and ROOT.  See [Section 0.3.3](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#033-getting-setup-to-code).
+The majority of the scripts in this analysis package utilize the [FFTPrepper](https://github.com/djsouthall/beacon/blob/2d2233c13ca2d1d659f543ce8e78c44b760a49ba/tools/fftmath.py#L43) class, which acts as a wrapper class on the beaconroot Reader class - providing additional tools for streamlining the process of upsampling, and filtering (additionally there are some daughter classes defined to aid in cross correlations / time delay calculations as well as comparing events to a provided template event).  As part of the optional filtering available in these classes, the so-called Sine Subtraction method of CW removal is available for use when loading signals.  A FFTPrepper object can have these [SineSubtract](https://github.com/djsouthall/beacon/blob/master/tools/sine_subtract.py) objects added to it for use when loading signals.  These utilize code from [libRootFftwWrapper](https://github.com/nichol77/libRootFftwWrapper).  Instructions for installing libRootFftWrapper are included in multiple locations below, however you can also follow the instructions in the [README](https://github.com/nichol77/libRootFftwWrapper/blob/master/README.md) of that package.  Ensure to install with the correct version of python and ROOT.  See [Section 0.3.4](https://github.com/beaconTau/beacon-deployment-2021/blob/main/README.md#034-getting-setup-to-code).
 
 Finally, there are required python packages that are required for most scripts in this analysis package.  In general you can see a list at [requirments](https://github.com/djsouthall/beacon/blob/master/requirements.txt).
 
@@ -85,18 +85,18 @@ This assumes you have a functional Ubuntu kernal.  Other linux systems can be us
 ## 0.3.1 Preparing Ubuntu
 
 Before installing the code, you need to make sure you can install packages like make and cmake.  When errors occurred for me the following link helped: https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/ .  Ideally you can ignore that and just type the following:
-    * `sudo apt update`
-    * `sudo apt-get update`
-    * `sudo apt install python3-pip`
-    * `sudo apt-get install make`
-    * `sudo apt-get install cmake`
-    * If no errors occur then you should be good to go.
+* `sudo apt update`
+* `sudo apt-get update`
+* `sudo apt install python3-pip`
+* `sudo apt-get install make`
+* `sudo apt-get install cmake`
+* If no errors occur then you should be good to go.
 
-## 0.3.1 Installing FFTW3
+## 0.3.2 Installing FFTW3
 
 Install FFTW3: `sudo apt-get install -y libfftw3-dev`
 
-## 0.3.2 Optional Git Setup
+## 0.3.3 Optional Git Setup
 Do this if you plan on using git commits and pushes.
 
 1. Update git username: `git config --global user.name "Your Name"`
@@ -107,7 +107,7 @@ Do this if you plan on using git commits and pushes.
     * https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/caching-your-github-credentials-in-git 
     * You will still be prompted for the generated personal access token the first time you push, but it will cache this for the time window you give it.
 
-## 0.3.3 Getting Setup to Code
+## 0.3.4 Getting Setup to Code
 1. Get the Conda installation file: `wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh`
 2. Install Conda: `bash ./Anaconda3-2020.11-Linux-x86_64.sh`, Follow the prompts.
 3. Create the root environment: `conda create -n my_root_env root -c conda-forge`
@@ -159,7 +159,7 @@ Do this if you plan on using git commits and pushes.
 20. At this point you may start coming across errors related to not having data.  This is great!  Copy data to the data directory we made earlier and hopefully all is good moving forward. If you do not know where to access the data contact Dan Southall or someone else in the know.
 21. To deactivate your environment type: `conda deactivate`
 
-## 0.3.4 Optional iPython Setup
+## 0.3.5 Optional iPython Setup
 If it is not already installed I would recommend getting and using it.  It is a better command line interface (CLI) for python.
 1. `sudo apt-get install ipython3`
 2. `ipython`
