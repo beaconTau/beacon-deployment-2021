@@ -64,6 +64,7 @@ Getting setup with Windows Subsystem for Linux - Most of this section can be ign
 
 1. Follow this video to get Ubuntu setup in WSL2: https://youtu.be/_fntjriRe48
     * You will want to update to a recent version of windows.  This will take a long time and should be done in advance
+    * You may need to enable the additional features *Windows Subsystem for Linux*, *Hyper-V*, and *Virtual Machine Platform* in the Windows Features menu.  All should be let through firewall.  You may want to restart as well. 
 2. To get GUI interface for WSL2 install xming.
 3. Allow xming through your firewall on both private and public networks.
 4. Run xlaunch -> Multiple windows -> Display number 0 -> Next -> Start no client -> Next -> Clipboard enabled -> No Access Control enabled -> Next -> Finish
@@ -76,6 +77,7 @@ Getting setup with Windows Subsystem for Linux - Most of this section can be ign
 6. You can now test that the graphical elements are working by running something like xeyes
     * `sudo apt-get install x11-apps`
     * `xeyes` - A pair of eyes should pop up that track mouse movement.  You can close this with ctrl-c
+    * If this did not work then try double checking your firewall settings.  Additionally hover over the xming app in the tray of our windows toolbar.  Ensure that it reads the same port number that you have set in your bashrc.  Above you were instructed to use Display number 0, but it may autoset to 0.0.  In which case it may be easier to update your bash script to match what xming wants to do: `export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0`
 7. You can see where your WSL files are stored by executing `explorer.exe .`, which will open Windows Explorer in the current directory.  You can then copy and past the path from above.  This is where you should direct any code editor, if you want to run windows programs to edit the code on your linux subsystem.
 
 ## 0.3.0 Installing on Ubuntu
