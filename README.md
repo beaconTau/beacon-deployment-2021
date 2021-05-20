@@ -111,7 +111,7 @@ Do this if you plan on using git commits and pushes.
 
 ## 0.3.4 Getting Setup to Code
 1. Get the Conda installation file: `wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh`
-2. Install Conda: `bash ./Anaconda3-2020.11-Linux-x86_64.sh`, Follow the prompts.
+2. Install Conda: `bash ./Anaconda3-2020.11-Linux-x86_64.sh`, Follow the prompts.  You may need to restart your terminal before proceeding.
 3. Create the root environment: `conda create -n my_root_env root -c conda-forge`
 4. Activate the environment: `conda activate my_root_env` - You can consider adding this to bashrc if you think you will always want to be in this environment.
 5. Create a BEACON directory:
