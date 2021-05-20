@@ -62,7 +62,7 @@ This section actually gets you to the point where you can have installed and set
 
 Getting setup with Windows Subsystem for Linux - Most of this section can be ignored if you are on a Mac or linux machine.
 
-1. Follow this video to get Ubuntu setup in WSL2: https://www.youtube.com/watch?v=_fntjriRe48&ab_channel=DavidBombal 
+1. Follow this video to get Ubuntu setup in WSL2: https://youtu.be/_fntjriRe48
     * You will want to update to a recent version of windows.  This will take a long time and should be done in advance
 2. To get GUI interface for WSL2 install xming.
 3. Allow xming through your firewall on both private and public networks.
