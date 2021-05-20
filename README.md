@@ -7,7 +7,6 @@
 Dan Southall - dsouthall@uchicago.edu
 Andrew Zeolla - azeolla@psu.edu
 
-
 # OVERVIEW
 
 Scripts developed for the 2021 deployments of the BEACON experiment.  These scripts heavily leverage the [BEACON Analysis Package](https://github.com/djsouthall/beacon).  Instructions for installing that code are included below.
