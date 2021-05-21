@@ -134,7 +134,8 @@ Do this if you plan on using git commits and pushes.
 
             export BEACON_INSTALL_DIR=/home/username/beacon/beaconroot/
             export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
-            export BEACON_DATA=/home/username/beacon/data/
+            export BEACON_RAW_DATA=/home/username/beacon/data/raw/
+            export BEACON_PROCESSED_DATA=/home/username/beacon/data/processed/
             export LIB_ROOT_FFTW_WRAPPER_DIR=/home/username/beacon/libRootFftwWrapper/
             export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
             export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BEACON_INSTALL_DIR/lib:$ANITA_INSTALL_DIR/lib
@@ -165,6 +166,7 @@ If it is not already installed I would recommend getting and using it.  It is a 
 1. `sudo apt-get install ipython3`
 2. `ipython`
 3. `%run ~/beacon/beacon/analysis/sample_script_B.py` - This or any other script can be used to test running.  By using the %run shortcut in the CLI, you will stay in the namespace of the executed script, which lets you play around with plots, variables, and also helps in debugging.
+4. Create an ipython profile and enable the autoreload function following this post: https://stackoverflow.com/a/43020072
 
 ## 0.4.0 Testing Setup
 
