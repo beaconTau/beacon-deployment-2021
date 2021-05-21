@@ -121,7 +121,10 @@ Do this if you plan on using git commits and pushes.
 7. Clone the beacon analysis repository: `git clone https://github.com/djsouthall/beacon`
 8. Clone the beaconroot repository: `git clone https://github.com/beaconTau/beaconroot`
 9. Clone the libRootFftwWrapper repository: `git clone https://github.com/nichol77/libRootFftwWrapper`
-10. Make a directory to store data: `mkdir data`
+10. Make a directory to store data, and sub directories for raw v.s. processed: 
+    * `mkdir data`
+    * `mkdir data/raw` - This is where the BEACON root files go.
+    * `mkdir data/processed` - This is where all analysis h5py files go. 
 11. Type:
     * `cd $CONDA_PREFIX`
     * `mkdir -p ./etc/conda/activate.d`
