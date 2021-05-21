@@ -134,7 +134,7 @@ Do this if you plan on using git commits and pushes.
 
             export BEACON_INSTALL_DIR=/home/username/beacon/beaconroot/
             export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
-            export BEACON_RAW_DATA=/home/username/beacon/data/raw/
+            export BEACON_DATA=/home/username/beacon/data/raw/
             export BEACON_PROCESSED_DATA=/home/username/beacon/data/processed/
             export LIB_ROOT_FFTW_WRAPPER_DIR=/home/username/beacon/libRootFftwWrapper/
             export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
