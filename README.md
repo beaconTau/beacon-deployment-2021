@@ -134,7 +134,8 @@ Do this if you plan on using git commits and pushes.
 12. Now we must define environment variables (variables accessible by the linux kernal itself, as well as within the python shell.  Typically these will be defined in bashrc, but we are setting this all up in a conda environment, so we will define them such that they are only active when in that environment.   Type: `vim $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh` This will open a text editor called vim.
 13. Starting from the top of the text editor write (replace "username" with your own):
     * `#!/bin/sh` <- Can add this at the top of the script if it does not already exist.  Not necessary likely.
-
+            
+            export BEACON_DEPLOYMENT_DIR=/home/username/beacon/beacon-deployment-2021/
             export BEACON_INSTALL_DIR=/home/username/beacon/beaconroot/
             export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
             export BEACON_DATA=/home/username/beacon/data/raw/
