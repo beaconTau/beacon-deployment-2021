@@ -140,7 +140,6 @@ Do this if you plan on using git commits and pushes.
             export BEACON_DATA=/home/username/beacon/data/raw/
             export BEACON_PROCESSED_DATA=/home/username/beacon/data/processed/
             export LIB_ROOT_FFTW_WRAPPER_DIR=/home/username/beacon/libRootFftwWrapper/
-            export BEACON_ANALYSIS_DIR=/home/username/beacon/beacon/
             export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BEACON_INSTALL_DIR/lib:$ANITA_INSTALL_DIR/lib
             export PYTHONPATH=$PYTHONPATH:/home/username/beacon/:/home/username/beacon/beaconroot/
             export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BEACON_INSTALL_DIR/lib
