@@ -50,12 +50,43 @@ def plotStationAndPulsers(deploy_index=default_deploy,plot_phase=False):
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
 
+
+def printBaselines(deploy_index=default_deploy):
+    '''
+    Currently only intended to plot the most recent station with the three pulsers that we used for it.
+    '''
+    try:
+        antennas_physical, antennas_phase_hpol, antennas_phase_vpol = info.loadAntennaLocationsENU(deploy_index=deploy_index)
+
+        print(info.loadAntennaLocationsENU(deploy_index=deploy_index))
+
+        colors = ['b','g','r','c']
+
+        for pol in ['hpol', 'vpol']:
+            if pol == 'hpol':
+                phase = antennas_phase_hpol
+            else:
+                 phase = antennas_phase_vpol
+
+            print('%s baselines:'%pol)
+            for pair in [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]:
+                baseline = numpy.sqrt((phase[pair[0]][0] - phase[pair[1]][0])**2 + (phase[pair[0]][1] - phase[pair[1]][1])**2 + (phase[pair[0]][2] - phase[pair[1]][2])**2)
+                print('\t%s : %0.3f m'%(str(pair),baseline))
+
+    except Exception as e:
+        print('\nError in %s'%inspect.stack()[0][3])
+        print(e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+
 if __name__ == '__main__':
     #plt.ion()
-    for deploy_file in [30,os.path.join(os.environ['BEACON_DEPLOYMENT_DIR'], 'config/deploy_30.json') ]:
+    for deploy_file in [os.path.join(os.environ['BEACON_DEPLOYMENT_DIR'], 'config/deploy_30.json') ]:
         try:
             plt.close('all')
-            fig, ax = plotStationAndPulsers(deploy_index=deploy_file,plot_phase=False)
+            printBaselines(deploy_index=default_deploy)
+            #fig, ax = plotStationAndPulsers(deploy_index=deploy_file,plot_phase=False)
 
         except Exception as e:
             print('Error in main loop.')
