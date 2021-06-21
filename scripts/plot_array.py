@@ -9,7 +9,7 @@ from beacon.tools import info
 default_deploy = info.returnDefaultDeploy()
 
 
-def plotStationAndPulsers(deploy_index=default_deploy,plot_phase=False):
+def plotStation(deploy_index=default_deploy,plot_phase=False):
     '''
     Currently only intended to plot the most recent station with the three pulsers that we used for it.
     '''
@@ -50,28 +50,88 @@ def plotStationAndPulsers(deploy_index=default_deploy,plot_phase=False):
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
 
-
-def printBaselines(deploy_index=default_deploy):
+def compareStations(deploy_index_1, deploy_index_2,plot_phase=False):
     '''
     Currently only intended to plot the most recent station with the three pulsers that we used for it.
     '''
     try:
-        antennas_physical, antennas_phase_hpol, antennas_phase_vpol = info.loadAntennaLocationsENU(deploy_index=deploy_index)
+        antennas_physical_1, antennas_phase_hpol_1, antennas_phase_vpol_1 = info.loadAntennaLocationsENU(deploy_index=deploy_index_1)
+        antennas_physical_2, antennas_phase_hpol_2, antennas_phase_vpol_2 = info.loadAntennaLocationsENU(deploy_index=deploy_index_2)
 
         print(info.loadAntennaLocationsENU(deploy_index=deploy_index))
 
         colors = ['b','g','r','c']
 
-        for pol in ['hpol', 'vpol']:
-            if pol == 'hpol':
-                phase = antennas_phase_hpol
-            else:
-                 phase = antennas_phase_vpol
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
 
-            print('%s baselines:'%pol)
+        for i, a in antennas_physical_1.items():
+            ax.scatter(a[0], a[1], a[2], marker='o',color=colors[i],label='Physical %i'%i,alpha=0.8)
+
+        for i, a in antennas_physical_2.items():
+            ax.scatter(a[0], a[1], a[2], marker='*',color=colors[i],label='Physical %i'%i,alpha=0.8)
+
+        ax.plot([antennas_physical_1[i][0],antennas_phase_physical_1[i][0]],[antennas_physical_1[i][1],antennas_phase_physical_1[i][1]],[antennas_physical_1[i][2],antennas_phase_physical_1[i][2]],color=colors[i],linestyle='--',alpha=0.5)
+
+
+        if plot_phase == True:
+            for i, a in antennas_phase_hpol_1.items():
+                try:
+                    ax.plot([antennas_hpol_1[i][0],antennas_phase_hpol_1[i][0]],[antennas_hpol_1[i][1],antennas_phase_hpol_1[i][1]],[antennas_hpol_1[i][2],antennas_phase_hpol_1[i][2]],color=colors[i],linestyle='--',alpha=0.5)
+                except:
+                    pass
+            for i, a in antennas_phase_vpol_1.items():
+                try:
+                    ax.plot([antennas_vpol_1[i][0],antennas_phase_vpol_1[i][0]],[antennas_vpol_1[i][1],antennas_phase_vpol_1[i][1]],[antennas_vpol_1[i][2],antennas_phase_vpol_1[i][2]],color=colors[i],linestyle='--',alpha=0.5)
+                except:
+                    pass
+
+        ax.set_xlabel('E (m)')
+        ax.set_ylabel('N (m)')
+        ax.set_zlabel('Relative Elevation (m)')
+        plt.legend()
+        return fig, ax
+    except Exception as e:
+        print('\nError in %s'%inspect.stack()[0][3])
+        print(e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+
+
+def printBaselines(deploy_index=default_deploy, calculate_phase=False, verbose=False):
+    '''
+    Currently only intended to plot the most recent station with the three pulsers that we used for it.
+    '''
+    try:
+        antennas_physical, antennas_phase_hpol, antennas_phase_vpol = info.loadAntennaLocationsENU(deploy_index=deploy_index,check=False)
+
+        print(info.loadAntennaLocationsENU(deploy_index=deploy_index,check=False))
+
+        colors = ['b','g','r','c']
+
+
+        if calculate_phase:
+            modes = ['physical','hpol', 'vpol']
+        else:
+            modes = ['physical']
+
+        for mode in modes:
+            if mode == 'hpol':
+                enu = antennas_phase_hpol
+            elif mode == 'vpol':
+                enu = antennas_phase_vpol
+            else:
+                enu = antennas_physical
+
+            print('%s baselines:'%mode)
             for pair in [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]:
-                baseline = numpy.sqrt((phase[pair[0]][0] - phase[pair[1]][0])**2 + (phase[pair[0]][1] - phase[pair[1]][1])**2 + (phase[pair[0]][2] - phase[pair[1]][2])**2)
-                print('\t%s : %0.3f m'%(str(pair),baseline))
+                try:
+                    baseline = numpy.sqrt((enu[pair[0]][0] - enu[pair[1]][0])**2 + (enu[pair[0]][1] - enu[pair[1]][1])**2 + (enu[pair[0]][2] - enu[pair[1]][2])**2)
+                    print('\t%s : %0.3f m'%(str(pair),baseline))
+                except:
+                    if verbose:
+                        print('%s failed or not present.'%mode)
 
     except Exception as e:
         print('\nError in %s'%inspect.stack()[0][3])
@@ -85,8 +145,8 @@ if __name__ == '__main__':
     for deploy_file in [os.path.join(os.environ['BEACON_DEPLOYMENT_DIR'], 'config/deploy_30.json') ]:
         try:
             plt.close('all')
-            printBaselines(deploy_index=default_deploy)
-            #fig, ax = plotStationAndPulsers(deploy_index=deploy_file,plot_phase=False)
+            printBaselines(deploy_index=deploy_file, calculate_phase=True)
+            #fig, ax = plotStation(deploy_index=deploy_file,plot_phase=False)
 
         except Exception as e:
             print('Error in main loop.')
